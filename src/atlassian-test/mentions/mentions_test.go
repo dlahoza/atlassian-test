@@ -1,4 +1,4 @@
-package emoicons
+package mentions
 
 import (
 	fabric "atlassian-test/filter_fabric"
@@ -10,16 +10,16 @@ func TestFilter(t *testing.T) {
 	f := new(filter)
 	assert := assert.New(t)
 	cases := map[string]fabric.FilteredResult{
-		`Good morning! (megusta) (coffee)`: {"megusta", "coffee"},
-		`Multiline string with 2 emoicons
-		(test) asdfsdf
+		`@chris you around?`: {"chris"},
+		`Multiline string with 2 mentions
+		@chris asdfsdf
 		sdfsdfasdf
-		(test2) asdfasdf`: {"test", "test2"},
-		`Another multiline string with 2 emoicons and one broken
-		(test) asdfsdf
-		sdfsdfasdf(bro
-		ken)
-		(test2) asdfasdf`: {"test", "test2"},
+		@david asdfasdf`: {"chris", "david"},
+		`Another multiline string with 2 mentions and one broken
+		@test asdfsdf
+		sdfsdfasdf @
+		broken
+		@test2 asdfasdf`: {"test", "test2"},
 	}
 	for k, v := range cases {
 		res := f.Filter(k)

@@ -1,4 +1,4 @@
-package emoicons
+package mentions
 
 import (
 	fabric "atlassian-test/filter_fabric"
@@ -6,10 +6,10 @@ import (
 	"regexp"
 )
 
-const FILTER_NAME = "emoicons"
+const FILTER_NAME = "mentions"
 
 // `(?m)` for multiline mode
-var filter_re = regexp.MustCompile(`(?m)\((\w{0,15})\)`)
+var filter_re = regexp.MustCompile(`(?m)@(\w+)`)
 
 // Empty struct for filter object
 type filter struct {
