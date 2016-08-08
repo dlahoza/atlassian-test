@@ -22,3 +22,7 @@ _testmain.go
 *.exe
 *.test
 *.prof
+.idea/
+*.iml
+glide.lock
+/src/atlassian-test/glide.yaml
