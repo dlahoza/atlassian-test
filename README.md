@@ -1,5 +1,5 @@
 # atlassian-test
-[![Build Status](https://travis-ci.org/DLag/atlassian-test.svg?branch=master)](https://travis-ci.org/DLag/atlassian-test)
+[![Build Status](https://travis-ci.org/DLag/atlassian-test.svg?branch=master)](https://travis-ci.org/DLag/atlassian-test)[![codebeat badge](https://codebeat.co/badges/a2e7418f-43ca-4655-80c5-c300f9e8abd7)](https://codebeat.co/projects/github-com-dlag-atlassian-test)
 
 Atlassian test task.
 
