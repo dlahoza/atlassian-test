@@ -7,6 +7,7 @@ env:
     - GIMME_OS=linux GIMME_ARCH=amd64
 
 install:
+    - export GOPATH=$(pwd)
     - cd src/atlassian-test
     - go get -d -v ./...
 
