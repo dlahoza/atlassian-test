@@ -12,7 +12,7 @@ import (
 func filterHandler(w http.ResponseWriter, r *http.Request) {
 	// Checking that HTTP method is POST
 	if r.Method != "POST" {
-		w.WriteHeader(404)
+		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 	// Reading request payload
@@ -20,12 +20,12 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	if err != nil {
 		log.WithError(err).Error("Can't read payload from HTTP request")
-		w.WriteHeader(500)
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Error when reading request"))
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
 	j := json.NewEncoder(w)
 	// Writing filtered and encoded to JSON response
 	err = j.Encode(fabric.FilterAll(string(payload)))

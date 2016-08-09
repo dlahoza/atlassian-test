@@ -53,10 +53,10 @@ func (f *filter) Filter(input string) (output fabric.FilteredResult) {
 
 func httpGet(url string) (result string) {
 	r, err := http.Get(url)
-	defer r.Body.Close()
 	if err != nil {
 		return
 	}
+	defer r.Body.Close()
 	buf, _ := ioutil.ReadAll(r.Body)
 	result = string(buf)
 	return
