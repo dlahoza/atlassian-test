@@ -26,3 +26,4 @@ _testmain.go
 *.iml
 glide.lock
 /src/atlassian-test/glide.yaml
+vendor
