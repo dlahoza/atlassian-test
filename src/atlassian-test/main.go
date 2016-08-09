@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "atlassian-test/emoicons"
+	_ "atlassian-test/links"
 	_ "atlassian-test/mentions"
 	log "github.com/Sirupsen/logrus"
 	"net/http"
