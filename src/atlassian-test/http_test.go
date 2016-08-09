@@ -23,7 +23,7 @@ func init() {
 	url = fmt.Sprintf("%s/filter", server.URL)
 }
 
-func TestFilter(t *testing.T) {
+func TestHandler(t *testing.T) {
 	assert := assert.New(t)
 	testMessage := `Good morning @chris! (megusta) (coffee)`
 	testResponse := `{"emoicons": ["megusta", "coffee"], "mentions": ["chris"]}`
