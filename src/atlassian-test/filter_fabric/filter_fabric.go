@@ -61,8 +61,11 @@ func (f *Filters) FilterAll(input string) (output map[string]FilteredResult) {
 	// Receiving results
 	for i := 0; i < count; i++ {
 		res := <-c
-		output[res.name] = res.result
+		if len(res.result) > 0 {
+			output[res.name] = res.result
+		}
 	}
+	log.Debugf("Processed %d filters", count)
 	return
 }
 
