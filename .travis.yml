@@ -1,15 +1,15 @@
-       language: go
+language: go
 
-       go:
-         - tip
+go:
+ - tip
 
-        env:
-            - GIMME_OS=linux GIMME_ARCH=amd64
+env:
+    - GIMME_OS=linux GIMME_ARCH=amd64
 
-        install:
-            - cd src/atlassian-test
-            - go get -d -v ./...
+install:
+    - cd src/atlassian-test
+    - go get -d -v ./...
 
-        script:
-            - cd src/atlassian-test
-            - go build -v ./...
+script:
+    - cd src/atlassian-test
+    - go build -v ./...
