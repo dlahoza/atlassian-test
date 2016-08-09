@@ -41,3 +41,24 @@ func TestFilter(t *testing.T) {
 		assert.JSONEq(string(vj), string(vres), "Test case %q failed", k)
 	}
 }
+
+//TestFilterWithInternet works only with Internet
+func TestFilterWithInternet(t *testing.T) {
+	f := &filter{get: httpGet}
+	assert := assert.New(t)
+	cases := map[string][]linksResult{
+		`@bob @john (success) such a cool feature;
+https://twitter.com/jdorfman/status/430511497475670016`: []linksResult{
+			{
+				Url:   "https://twitter.com/jdorfman/status/430511497475670016",
+				Title: "Justin Dorfman on Twitter: \"nice @littlebigdeta...",
+			},
+		},
+	}
+	for k, v := range cases {
+		res := f.Filter(k)
+		vj, _ := json.Marshal(v)
+		vres, _ := json.Marshal(res)
+		assert.JSONEq(string(vj), string(vres), "Test case %q failed", k)
+	}
+}

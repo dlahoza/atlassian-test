@@ -43,7 +43,6 @@ func (f *filter) Filter(input string) (output fabric.FilteredResult) {
 			res.Title = html.UnescapeString(tm[0][1])
 			// Cutting to max len
 			if len(res.Title) > TITLE_MAX_LEN {
-				// Adding
 				res.Title = res.Title[:47] + "..."
 			}
 		}
