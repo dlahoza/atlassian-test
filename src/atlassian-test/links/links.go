@@ -2,15 +2,21 @@ package links
 
 import (
 	fabric "atlassian-test/filter_fabric"
-	log "github.com/Sirupsen/logrus"
+	"context"
 	"html"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"time"
+
+	log "github.com/Sirupsen/logrus"
 )
 
 const FILTER_NAME = "links"
 const TITLE_MAX_LEN = 50
+const MAXHTMLSIZE = 10 * (1 << 10) // 10KiB
+const TIMEOUT = 10                 //10 seconds
 
 // `(?m)` for multiline mode
 var filter_re = regexp.MustCompile(`(?m)https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)`)
@@ -52,12 +58,20 @@ func (f *filter) Filter(input string) (output fabric.FilteredResult) {
 }
 
 func httpGet(url string) (result string) {
-	r, err := http.Get(url)
+	// Getting web page with timeout and size limit
+	ctx, _ := context.WithTimeout(context.Background(), time.Second*TIMEOUT)
+	hc := new(http.Client)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return
+	}
+	req.WithContext(ctx)
+	r, err := hc.Do(req)
 	if err != nil {
 		return
 	}
 	defer r.Body.Close()
-	buf, _ := ioutil.ReadAll(r.Body)
+	buf, _ := ioutil.ReadAll(io.LimitReader(r.Body, MAXHTMLSIZE))
 	result = string(buf)
 	return
 }
